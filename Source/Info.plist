@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.Cycling74.driver.Soundflower</string>
+	<string>com.Mixlr.driver.MixlrAudio</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -70,11 +70,11 @@
 				</dict>
 			</array>
 			<key>CFBundleIdentifier</key>
-			<string>com.Cycling74.driver.Soundflower</string>
+			<string>com.Mixlr.driver.MixlrAudio</string>
 			<key>IOClass</key>
-			<string>com_cycling74_driver_SoundflowerDevice</string>
+			<string>com_mixlr_driver_MixlrAudioDevice</string>
 			<key>IOMatchCategory</key>
-			<string>com_cycling74_driver_SoundflowerDevice</string>
+			<string>com_mixlr_driver_MixlrAudioDevice</string>
 			<key>IOProviderClass</key>
 			<string>IOResources</string>
 			<key>IOResourceMatch</key>

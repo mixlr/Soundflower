@@ -82,8 +82,8 @@
 			);
 			dependencies = (
 			);
-			name = Soundflower;
-			productName = Soundflower;
+			name = MixlrAudio;
+			productName = MixlrAudio;
 			productReference = 222ADFEC1862531600C9BE56 /* Soundflower.kext */;
 			productType = "com.apple.product-type.kernel-extension";
 		};
@@ -94,7 +94,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0610;
-				ORGANIZATIONNAME = "Cycling '74";
+				ORGANIZATIONNAME = Mixlr;
 				TargetAttributes = {
 					222ADFEB1862531600C9BE56 = {
 						DevelopmentTeam = 28L6ZBBJPE;
@@ -239,7 +239,7 @@
 				INSTALL_GROUP = wheel;
 				INSTALL_OWNER = root;
 				INSTALL_PATH = /Library/Extensions;
-				MODULE_NAME = com.Cycling74.driver.Soundflower;
+				MODULE_NAME = com.Mixlr.driver.MixlrAudio;
 				MODULE_VERSION = 2.0b1;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -265,7 +265,7 @@
 				INSTALL_GROUP = wheel;
 				INSTALL_OWNER = root;
 				INSTALL_PATH = /Library/Extensions;
-				MODULE_NAME = com.Cycling74.driver.Soundflower;
+				MODULE_NAME = com.Mixlr.driver.MixlrAudio;
 				MODULE_VERSION = 2.0b1;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -63,9 +63,9 @@ bool SoundflowerDevice::initHardware(IOService *provider)
     if (!super::initHardware(provider))
         goto Done;
     
-    setDeviceName("Soundflower");
-    setDeviceShortName("Soundflower");
-    setManufacturerName("ma++ ingalls for Cycling '74");
+    setDeviceName("Mixlr");
+    setDeviceShortName("Mixlr");
+    setManufacturerName("Mixlr");
     
     if (!createAudioEngines())
         goto Done;
