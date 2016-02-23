@@ -1,5 +1,5 @@
 /*
-	File:SoundflowerEngine.h
+	File:MixlrAudioEngine.h
 
 	Version: 1.0.1, ma++ ingalls
     
@@ -28,12 +28,12 @@
 #define _SoundflowerENGINE_H
 
 #include <IOKit/audio/IOAudioEngine.h>
-#include "SoundflowerDevice.h"
+#include "MixlrAudioDevice.h"
 
 
-class SoundflowerEngine : public IOAudioEngine
+class MixlrAudioEngine : public IOAudioEngine
 {
-    OSDeclareDefaultStructors(SoundflowerEngine)
+    OSDeclareDefaultStructors(MixlrAudioEngine)
     
 	UInt32				mBufferSize;
 	void*				mBuffer;				// input/output buffer

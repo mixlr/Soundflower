@@ -1,5 +1,5 @@
 /*
-  File:SoundflowerDevice.cpp
+  File:MixlrAudioDevice.cpp
 
 	Version: 1.0.1, ma++ ingalls
     
@@ -34,8 +34,8 @@
     as an input buffer, allowing applications to send audio one another.
 */
 
-#include "SoundflowerDevice.h"
-#include "SoundflowerEngine.h"
+#include "MixlrAudioDevice.h"
+#include "MixlrAudioEngine.h"
 #include <IOKit/audio/IOAudioControl.h>
 #include <IOKit/audio/IOAudioLevelControl.h>
 #include <IOKit/audio/IOAudioToggleControl.h>
@@ -44,21 +44,21 @@
 
 #define super IOAudioDevice
 
-OSDefineMetaClassAndStructors(SoundflowerDevice, IOAudioDevice)
+OSDefineMetaClassAndStructors(MixlrAudioDevice, IOAudioDevice)
 
 // There should probably only be one of these? This needs to be 
 // set to the last valid position of the log lookup table. 
-const SInt32 SoundflowerDevice::kVolumeMax = 99;
-const SInt32 SoundflowerDevice::kGainMax = 99;
+const SInt32 MixlrAudioDevice::kVolumeMax = 99;
+const SInt32 MixlrAudioDevice::kGainMax = 99;
 
 
 
 
-bool SoundflowerDevice::initHardware(IOService *provider)
+bool MixlrAudioDevice::initHardware(IOService *provider)
 {
     bool result = false;
     
-	//IOLog("SoundflowerDevice[%p]::initHardware(%p)\n", this, provider);
+	//IOLog("MixlrAudioDevice[%p]::initHardware(%p)\n", this, provider);
     
     if (!super::initHardware(provider))
         goto Done;
@@ -78,30 +78,30 @@ Done:
 }
 
 
-bool SoundflowerDevice::createAudioEngines()
+bool MixlrAudioDevice::createAudioEngines()
 {
     OSArray*				audioEngineArray = OSDynamicCast(OSArray, getProperty(AUDIO_ENGINES_KEY));
     OSCollectionIterator*	audioEngineIterator;
     OSDictionary*			audioEngineDict;
 	
     if (!audioEngineArray) {
-        IOLog("SoundflowerDevice[%p]::createAudioEngine() - Error: no AudioEngine array in personality.\n", this);
+        IOLog("MixlrAudioDevice[%p]::createAudioEngine() - Error: no AudioEngine array in personality.\n", this);
         return false;
     }
     
 	audioEngineIterator = OSCollectionIterator::withCollection(audioEngineArray);
     if (!audioEngineIterator) {
-		IOLog("SoundflowerDevice: no audio engines available.\n");
+		IOLog("MixlrAudioDevice: no audio engines available.\n");
 		return true;
 	}
     
     while ((audioEngineDict = (OSDictionary*)audioEngineIterator->getNextObject())) {
-		SoundflowerEngine*	audioEngine = NULL;
+		MixlrAudioEngine*	audioEngine = NULL;
 		
         if (OSDynamicCast(OSDictionary, audioEngineDict) == NULL)
             continue;
         
-		audioEngine = new SoundflowerEngine;
+		audioEngine = new MixlrAudioEngine;
         if (!audioEngine)
 			continue;
         
@@ -127,7 +127,7 @@ bool SoundflowerDevice::createAudioEngines()
     audioEngine->addDefaultAudioControl(control); \
     control->release();
 
-bool SoundflowerDevice::initControls(SoundflowerEngine* audioEngine)
+bool MixlrAudioDevice::initControls(MixlrAudioEngine* audioEngine)
 {
     IOAudioControl*	control = NULL;
     
@@ -160,9 +160,9 @@ bool SoundflowerDevice::initControls(SoundflowerEngine* audioEngine)
 		 // scheme, we use a size 100 lookup table to compute the correct log scaling. And set
 		 // the minimum to -40 dB. Perhaps -50 dB would have been better, but this seems ok.
 		 
-        control = IOAudioLevelControl::createVolumeControl(SoundflowerDevice::kVolumeMax,		// Initial value
+        control = IOAudioLevelControl::createVolumeControl(MixlrAudioDevice::kVolumeMax,		// Initial value
                                                            0,									// min value
-                                                           SoundflowerDevice::kVolumeMax,		// max value
+                                                           MixlrAudioDevice::kVolumeMax,		// max value
                                                            (-40 << 16) + (32768),				// -72 in IOFixed (16.16)
                                                            0,									// max 0.0 in IOFixed
                                                            channel,								// kIOAudioControlChannelIDDefaultLeft,
@@ -172,9 +172,9 @@ bool SoundflowerDevice::initControls(SoundflowerEngine* audioEngine)
         addControl(control, (IOAudioControl::IntValueChangeHandler)volumeChangeHandler);
         
         // Gain control for each channel
-        control = IOAudioLevelControl::createVolumeControl(SoundflowerDevice::kGainMax,			// Initial value
+        control = IOAudioLevelControl::createVolumeControl(MixlrAudioDevice::kGainMax,			// Initial value
                                                            0,									// min value
-                                                           SoundflowerDevice::kGainMax,			// max value
+                                                           MixlrAudioDevice::kGainMax,			// max value
                                                            0,									// min 0.0 in IOFixed
                                                            (40 << 16) + (32768),				// 72 in IOFixed (16.16)
                                                            channel,								// kIOAudioControlChannelIDDefaultLeft,
@@ -204,10 +204,10 @@ bool SoundflowerDevice::initControls(SoundflowerEngine* audioEngine)
 }
 
 
-IOReturn SoundflowerDevice::volumeChangeHandler(IOService *target, IOAudioControl *volumeControl, SInt32 oldValue, SInt32 newValue)
+IOReturn MixlrAudioDevice::volumeChangeHandler(IOService *target, IOAudioControl *volumeControl, SInt32 oldValue, SInt32 newValue)
 {
     IOReturn			result = kIOReturnBadArgument;
-    SoundflowerDevice*	audioDevice = (SoundflowerDevice *)target;
+    MixlrAudioDevice*	audioDevice = (MixlrAudioDevice *)target;
 	
     if (audioDevice)
         result = audioDevice->volumeChanged(volumeControl, oldValue, newValue);
@@ -215,7 +215,7 @@ IOReturn SoundflowerDevice::volumeChangeHandler(IOService *target, IOAudioContro
 }
 
 
-IOReturn SoundflowerDevice::volumeChanged(IOAudioControl *volumeControl, SInt32 oldValue, SInt32 newValue)
+IOReturn MixlrAudioDevice::volumeChanged(IOAudioControl *volumeControl, SInt32 oldValue, SInt32 newValue)
 {
     if (volumeControl)
          mVolume[volumeControl->getChannelID()] = newValue;
@@ -223,10 +223,10 @@ IOReturn SoundflowerDevice::volumeChanged(IOAudioControl *volumeControl, SInt32 
 }
 
 
-IOReturn SoundflowerDevice::outputMuteChangeHandler(IOService *target, IOAudioControl *muteControl, SInt32 oldValue, SInt32 newValue)
+IOReturn MixlrAudioDevice::outputMuteChangeHandler(IOService *target, IOAudioControl *muteControl, SInt32 oldValue, SInt32 newValue)
 {
     IOReturn			result = kIOReturnBadArgument;
-    SoundflowerDevice*	audioDevice = (SoundflowerDevice*)target;
+    MixlrAudioDevice*	audioDevice = (MixlrAudioDevice*)target;
 	
     if (audioDevice)
         result = audioDevice->outputMuteChanged(muteControl, oldValue, newValue);
@@ -234,7 +234,7 @@ IOReturn SoundflowerDevice::outputMuteChangeHandler(IOService *target, IOAudioCo
 }
 
 
-IOReturn SoundflowerDevice::outputMuteChanged(IOAudioControl *muteControl, SInt32 oldValue, SInt32 newValue)
+IOReturn MixlrAudioDevice::outputMuteChanged(IOAudioControl *muteControl, SInt32 oldValue, SInt32 newValue)
 {
     if (muteControl)
          mMuteOut[muteControl->getChannelID()] = newValue;
@@ -242,10 +242,10 @@ IOReturn SoundflowerDevice::outputMuteChanged(IOAudioControl *muteControl, SInt3
 }
 
 
-IOReturn SoundflowerDevice::gainChangeHandler(IOService *target, IOAudioControl *gainControl, SInt32 oldValue, SInt32 newValue)
+IOReturn MixlrAudioDevice::gainChangeHandler(IOService *target, IOAudioControl *gainControl, SInt32 oldValue, SInt32 newValue)
 {
     IOReturn			result = kIOReturnBadArgument;
-    SoundflowerDevice*	audioDevice = (SoundflowerDevice *)target;
+    MixlrAudioDevice*	audioDevice = (MixlrAudioDevice *)target;
 	
     if (audioDevice)
         result = audioDevice->gainChanged(gainControl, oldValue, newValue);
@@ -253,7 +253,7 @@ IOReturn SoundflowerDevice::gainChangeHandler(IOService *target, IOAudioControl 
 }
 
 
-IOReturn SoundflowerDevice::gainChanged(IOAudioControl *gainControl, SInt32 oldValue, SInt32 newValue)
+IOReturn MixlrAudioDevice::gainChanged(IOAudioControl *gainControl, SInt32 oldValue, SInt32 newValue)
 {
     if (gainControl)
 		mGain[gainControl->getChannelID()] = newValue;
@@ -261,10 +261,10 @@ IOReturn SoundflowerDevice::gainChanged(IOAudioControl *gainControl, SInt32 oldV
 }
 
 
-IOReturn SoundflowerDevice::inputMuteChangeHandler(IOService *target, IOAudioControl *muteControl, SInt32 oldValue, SInt32 newValue)
+IOReturn MixlrAudioDevice::inputMuteChangeHandler(IOService *target, IOAudioControl *muteControl, SInt32 oldValue, SInt32 newValue)
 {
     IOReturn			result = kIOReturnBadArgument;
-    SoundflowerDevice*	audioDevice = (SoundflowerDevice*)target;
+    MixlrAudioDevice*	audioDevice = (MixlrAudioDevice*)target;
 
     if (audioDevice)
         result = audioDevice->inputMuteChanged(muteControl, oldValue, newValue);
@@ -272,7 +272,7 @@ IOReturn SoundflowerDevice::inputMuteChangeHandler(IOService *target, IOAudioCon
 }
 
 
-IOReturn SoundflowerDevice::inputMuteChanged(IOAudioControl *muteControl, SInt32 oldValue, SInt32 newValue)
+IOReturn MixlrAudioDevice::inputMuteChanged(IOAudioControl *muteControl, SInt32 oldValue, SInt32 newValue)
 {
     if (muteControl)
          mMuteIn[muteControl->getChannelID()] = newValue;

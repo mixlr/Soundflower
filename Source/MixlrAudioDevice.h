@@ -1,5 +1,5 @@
 /*
-	File:SoundflowerDevice.h
+	File:MixlrAudioDevice.h
 
 	Version: 1.0.1, ma++ ingalls
     
@@ -38,16 +38,16 @@
 #define SAMPLE_RATES_KEY				"SampleRates"
 #define SEPARATE_STREAM_BUFFERS_KEY		"SeparateStreamBuffers"
 #define SEPARATE_INPUT_BUFFERS_KEY		"SeparateInputBuffers"
-#define SoundflowerDevice				com_mixlr_driver_MixlrAudioDevice
+#define MixlrAudioDevice				com_mixlr_driver_MixlrAudioDevice
 
 #define NUM_CHANS 64
 
-class SoundflowerEngine;
+class MixlrAudioEngine;
 
-class SoundflowerDevice : public IOAudioDevice
+class MixlrAudioDevice : public IOAudioDevice
 {
-    OSDeclareDefaultStructors(SoundflowerDevice)
-    friend class SoundflowerEngine;
+    OSDeclareDefaultStructors(MixlrAudioDevice)
+    friend class MixlrAudioEngine;
     
 	// class members
 	
@@ -67,7 +67,7 @@ class SoundflowerDevice : public IOAudioDevice
 	
     virtual bool initHardware(IOService *provider);
     virtual bool createAudioEngines();
-    virtual bool initControls(SoundflowerEngine *audioEngine);
+    virtual bool initControls(MixlrAudioEngine *audioEngine);
     
     static  IOReturn volumeChangeHandler(IOService *target, IOAudioControl *volumeControl, SInt32 oldValue, SInt32 newValue);
     virtual IOReturn volumeChanged(IOAudioControl *volumeControl, SInt32 oldValue, SInt32 newValue);

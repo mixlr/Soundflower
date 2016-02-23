@@ -7,19 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		222AE0091862541400C9BE56 /* SoundflowerDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 222AE0021862541400C9BE56 /* SoundflowerDevice.cpp */; };
-		222AE00A1862541400C9BE56 /* SoundflowerDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 222AE0031862541400C9BE56 /* SoundflowerDevice.h */; };
-		222AE00B1862541400C9BE56 /* SoundflowerEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 222AE0041862541400C9BE56 /* SoundflowerEngine.cpp */; };
-		222AE00C1862541400C9BE56 /* SoundflowerEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 222AE0051862541400C9BE56 /* SoundflowerEngine.h */; };
+		222AE0091862541400C9BE56 /* MixlrAudioDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 222AE0021862541400C9BE56 /* MixlrAudioDevice.cpp */; };
+		222AE00A1862541400C9BE56 /* MixlrAudioDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 222AE0031862541400C9BE56 /* MixlrAudioDevice.h */; };
+		222AE00B1862541400C9BE56 /* MixlrAudioEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 222AE0041862541400C9BE56 /* MixlrAudioEngine.cpp */; };
+		222AE00C1862541400C9BE56 /* MixlrAudioEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 222AE0051862541400C9BE56 /* MixlrAudioEngine.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		222ADFEC1862531600C9BE56 /* Soundflower.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Soundflower.kext; sourceTree = BUILT_PRODUCTS_DIR; };
+		222ADFEC1862531600C9BE56 /* MixlrAudio.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MixlrAudio.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		222ADFFF1862541300C9BE56 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		222AE0021862541400C9BE56 /* SoundflowerDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoundflowerDevice.cpp; sourceTree = "<group>"; };
-		222AE0031862541400C9BE56 /* SoundflowerDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundflowerDevice.h; sourceTree = "<group>"; };
-		222AE0041862541400C9BE56 /* SoundflowerEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoundflowerEngine.cpp; sourceTree = "<group>"; };
-		222AE0051862541400C9BE56 /* SoundflowerEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundflowerEngine.h; sourceTree = "<group>"; };
+		222AE0021862541400C9BE56 /* MixlrAudioDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MixlrAudioDevice.cpp; sourceTree = "<group>"; };
+		222AE0031862541400C9BE56 /* MixlrAudioDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MixlrAudioDevice.h; sourceTree = "<group>"; };
+		222AE0041862541400C9BE56 /* MixlrAudioEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MixlrAudioEngine.cpp; sourceTree = "<group>"; };
+		222AE0051862541400C9BE56 /* MixlrAudioEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MixlrAudioEngine.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,10 +37,10 @@
 			isa = PBXGroup;
 			children = (
 				222ADFFF1862541300C9BE56 /* Info.plist */,
-				222AE0021862541400C9BE56 /* SoundflowerDevice.cpp */,
-				222AE0031862541400C9BE56 /* SoundflowerDevice.h */,
-				222AE0041862541400C9BE56 /* SoundflowerEngine.cpp */,
-				222AE0051862541400C9BE56 /* SoundflowerEngine.h */,
+				222AE0021862541400C9BE56 /* MixlrAudioDevice.cpp */,
+				222AE0031862541400C9BE56 /* MixlrAudioDevice.h */,
+				222AE0041862541400C9BE56 /* MixlrAudioEngine.cpp */,
+				222AE0051862541400C9BE56 /* MixlrAudioEngine.h */,
 				222ADFED1862531600C9BE56 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -48,7 +48,7 @@
 		222ADFED1862531600C9BE56 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				222ADFEC1862531600C9BE56 /* Soundflower.kext */,
+				222ADFEC1862531600C9BE56 /* MixlrAudio.kext */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -60,17 +60,17 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				222AE00A1862541400C9BE56 /* SoundflowerDevice.h in Headers */,
-				222AE00C1862541400C9BE56 /* SoundflowerEngine.h in Headers */,
+				222AE00A1862541400C9BE56 /* MixlrAudioDevice.h in Headers */,
+				222AE00C1862541400C9BE56 /* MixlrAudioEngine.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		222ADFEB1862531600C9BE56 /* Soundflower */ = {
+		222ADFEB1862531600C9BE56 /* MixlrAudio */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 222ADFFC1862531600C9BE56 /* Build configuration list for PBXNativeTarget "Soundflower" */;
+			buildConfigurationList = 222ADFFC1862531600C9BE56 /* Build configuration list for PBXNativeTarget "MixlrAudio" */;
 			buildPhases = (
 				222ADFE61862531600C9BE56 /* Sources */,
 				222ADFE71862531600C9BE56 /* Frameworks */,
@@ -84,7 +84,7 @@
 			);
 			name = MixlrAudio;
 			productName = MixlrAudio;
-			productReference = 222ADFEC1862531600C9BE56 /* Soundflower.kext */;
+			productReference = 222ADFEC1862531600C9BE56 /* MixlrAudio.kext */;
 			productType = "com.apple.product-type.kernel-extension";
 		};
 /* End PBXNativeTarget section */
@@ -113,7 +113,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				222ADFEB1862531600C9BE56 /* Soundflower */,
+				222ADFEB1862531600C9BE56 /* MixlrAudio */,
 			);
 		};
 /* End PBXProject section */
@@ -143,8 +143,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				222AE00B1862541400C9BE56 /* SoundflowerEngine.cpp in Sources */,
-				222AE0091862541400C9BE56 /* SoundflowerDevice.cpp in Sources */,
+				222AE00B1862541400C9BE56 /* MixlrAudioEngine.cpp in Sources */,
+				222AE0091862541400C9BE56 /* MixlrAudioDevice.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,7 +286,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		222ADFFC1862531600C9BE56 /* Build configuration list for PBXNativeTarget "Soundflower" */ = {
+		222ADFFC1862531600C9BE56 /* Build configuration list for PBXNativeTarget "MixlrAudio" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				222ADFFD1862531600C9BE56 /* Debug */,
