@@ -30,7 +30,7 @@
 					<key>BlockSize</key>
 					<integer>8192</integer>
 					<key>Description</key>
-					<string>Mixlr (2ch)</string>
+					<string>Mixlr (Virtual Input)</string>
 					<key>Formats</key>
 					<array>
 						<dict>
